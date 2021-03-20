@@ -15,8 +15,8 @@ namespace BilliardGame
          public float X { get; set;}
          public float Y { get; set;}
          public float R { get; set; }
-         float DX { get; set;}
-         float DY { get; set;}
+        public float DX { get; set;}
+        public float DY { get; set;}
         public  Ball(float x, float y, float r, float dx, float dy)
         {
             this.X = x;

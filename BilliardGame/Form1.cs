@@ -18,6 +18,12 @@ namespace BilliardGame
         Graphics BtmToG;
         public Ball ball;
         SolidBrush br = new SolidBrush(Color.Blue);
+        bool dragging;
+        RectangleF r = new RectangleF();
+        Point cursor = Point.Empty;
+
+        float x;
+        float y;
         public Form1()
         {
             InitializeComponent();
@@ -40,13 +46,48 @@ namespace BilliardGame
             
             label1.Text = Convert.ToString(ball.X);
             label2.Text = Convert.ToString(ball.Y);
-           // label3.Text = Convert.ToString(ball1.D);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ball = new Ball(122F, 222F, 15F, 16f, -13f);
+            ball = new Ball(122F, 222F, 10F, 16f, -13f);
+            r.X = ball.X;
+            r.Y = ball.Y;
+            r.Width = ball.R;
+            r.Height = ball.R;
+
             timer1.Enabled = true;
+        }
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (r.Contains(cursor))
+            {
+                ball.X = r.X - cursor.X;
+                ball.Y = r.Y - cursor.Y;
+                ball.DX = 0F;
+                ball.DY = 0F;
+                dragging = true;
+            }
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            dragging = false;
+            r.Height = 30;
+            r.Width = 30;
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            cursor.X = e.X;
+            cursor.Y = e.Y;
+            if (dragging)
+            {
+                r.X = cursor.X + ball.X;
+                r.Y = cursor.Y + ball.Y;
+            }
+            
         }
     }
 }
