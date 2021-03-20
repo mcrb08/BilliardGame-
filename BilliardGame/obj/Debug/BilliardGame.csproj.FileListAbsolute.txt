@@ -1,0 +1,10 @@
+C:\Users\mcrb\source\repos\BilliardGame\BilliardGame\obj\Debug\BilliardGame.csprojAssemblyReference.cache
+C:\Users\mcrb\source\repos\BilliardGame\BilliardGame\obj\Debug\BilliardGame.Form1.resources
+C:\Users\mcrb\source\repos\BilliardGame\BilliardGame\obj\Debug\BilliardGame.Properties.Resources.resources
+C:\Users\mcrb\source\repos\BilliardGame\BilliardGame\obj\Debug\BilliardGame.csproj.GenerateResource.cache
+C:\Users\mcrb\source\repos\BilliardGame\BilliardGame\obj\Debug\BilliardGame.csproj.CoreCompileInputs.cache
+C:\Users\mcrb\source\repos\BilliardGame\BilliardGame\bin\Debug\BilliardGame.exe.config
+C:\Users\mcrb\source\repos\BilliardGame\BilliardGame\bin\Debug\BilliardGame.exe
+C:\Users\mcrb\source\repos\BilliardGame\BilliardGame\bin\Debug\BilliardGame.pdb
+C:\Users\mcrb\source\repos\BilliardGame\BilliardGame\obj\Debug\BilliardGame.exe
+C:\Users\mcrb\source\repos\BilliardGame\BilliardGame\obj\Debug\BilliardGame.pdb
