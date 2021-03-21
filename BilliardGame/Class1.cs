@@ -34,12 +34,16 @@ namespace BilliardGame
                 DX = -DX;
             X += DX;
             DX *= 0.99F;
+            if ( Math.Abs(DX) < 0.01F)
+                DX = 0;
             if (Y >= Form1.ActiveForm.ClientSize.Height - 2 * R)
                 DY = -DY;
             if (Y < 0)
                 DY = -DY;
             Y += DY;
             DY *= 0.99F;
+            if (Math.Abs(DY) < 0.01F)
+                DY = 0;
         }
 
     }

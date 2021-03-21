@@ -18,7 +18,9 @@ namespace BilliardGame
         Graphics BtmToG;
         public Ball ball;
         SolidBrush br = new SolidBrush(Color.Blue);
+        SolidBrush blueBrush = new SolidBrush(Color.Red);
         bool dragging;
+        bool tension;
         RectangleF r = new RectangleF();
         Point cursor = Point.Empty;
 
@@ -26,6 +28,7 @@ namespace BilliardGame
         float y;
         public Form1()
         {
+            
             InitializeComponent();
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -33,28 +36,36 @@ namespace BilliardGame
             g = this.CreateGraphics();
             btm = new Bitmap(this.Width, this.Height);
             BtmToG = Graphics.FromImage(btm);
-            SolidBrush blueBrush = new SolidBrush(Color.Blue);
+            
         }
         
         
         private void timer1_Tick(object sender, EventArgs e)
         {
+            r.X = ball.X;
+            r.Y = ball.Y;
             BtmToG.Clear(Color.Green);
             ball.MoveBall();       // вычисление нового положения шара
+            if(tension)
+            BtmToG.DrawLine(new Pen(Color.Blue), ball.X+ball.R, ball.Y+ball.R, cursor.X, cursor.Y);
+            BtmToG.FillRectangle(blueBrush, r);
             BtmToG.FillEllipse(br, ball.X, ball.Y, 2 * ball.R, 2 * ball.R);
+            
             g.DrawImage(btm, Point.Empty);
             
             label1.Text = Convert.ToString(ball.X);
             label2.Text = Convert.ToString(ball.Y);
+            label3.Text = tension.ToString();
+            label4.Text = Convert.ToString(ball.DX);
+            label5.Text = Convert.ToString(ball.DY);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ball = new Ball(122F, 222F, 10F, 16f, -13f);
-            r.X = ball.X;
-            r.Y = ball.Y;
-            r.Width = ball.R;
-            r.Height = ball.R;
+            ball = new Ball(122F, 222F, 15F, 16f, -13f);
+            
+            r.Width = ball.R*2;
+            r.Height = ball.R*2;
 
             timer1.Enabled = true;
         }
@@ -67,6 +78,7 @@ namespace BilliardGame
                 ball.Y = r.Y - cursor.Y;
                 ball.DX = 0F;
                 ball.DY = 0F;
+                tension = false;
                 dragging = true;
             }
         }
@@ -74,8 +86,10 @@ namespace BilliardGame
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
             dragging = false;
-            r.Height = 30;
-            r.Width = 30;
+            if(ball.DX==0&&ball.DY==0)
+            tension = true;
+            //r.Height = 30;
+            //r.Width = 30;
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
@@ -84,10 +98,21 @@ namespace BilliardGame
             cursor.Y = e.Y;
             if (dragging)
             {
-                r.X = cursor.X + ball.X;
-                r.Y = cursor.Y + ball.Y;
+                ball.X = cursor.X - ball.R;
+                ball.Y = cursor.Y - ball.R;
+            } 
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (!dragging)
+            {
+                ball.DX = -(e.X - ball.X)/5;
+                ball.DY = -(e.Y - ball.Y)/5;
+                //ball.DX = (float)Math.Sqrt(Convert.ToDouble(Math.Pow(Convert.ToDouble(), 2))); ;
+                //ball.DY = (float)Math.Sqrt(Convert.ToDouble(Math.Pow(Convert.ToDouble(e.Y - ball.Y), 2)));
+                tension = false;
             }
-            
         }
     }
 }
